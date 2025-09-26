@@ -1,0 +1,1 @@
+Aesthetic, single-page to-do list and Pomodoro timer. Features a modern purple color scheme, real-time progress tracking, and interactive modals. Built with vanilla JS, HTML, and CSS for a clean, responsive UI
