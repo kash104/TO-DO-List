@@ -1,0 +1,449 @@
+/* Color Palette (Purple Shades) */
+:root {
+    --primary-purple: #6a0dad; /* Deep Violet/Primary Accent */
+    --light-purple: #c4a7e7;  /* Light Lavender for text/borders */
+    --background-light: #f4f0ff; /* Very Light Lilac Background */
+    --background-dark: #8b5cf6; /* Medium Purple for buttons/fills */
+    --text-color: #3e3845; /* Dark text for readability */
+    --completed-color: #a8dadc; /* Soft contrasting color for completion */
+    --timer-bg-dark: #3a1a5b; /* Darker purple for timer background */
+    --nav-bg: #e0d0ff; /* Lighter purple for nav/timer */
+    --task-item-bg: #f9f7ff; /* Lighter background for task items */
+}
+
+/* Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    position: relative;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(106, 13, 173, 0.1); /* Subtle purple shadow */
+    position: relative;
+}
+
+/* Navigation container for timer and quote button */
+.nav-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Pomodoro Timer Box */
+.pomodoro-box {
+    background-color: var(--nav-bg);
+    border-radius: 10px;
+    padding: 10px 15px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.timer-display {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-purple);
+}
+
+.timer-controls button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.timer-controls button:hover {
+    transform: scale(1.1);
+}
+
+.timer-controls button svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--primary-purple);
+    transition: fill 0.2s;
+}
+
+.timer-controls button:hover svg {
+    fill: var(--background-dark);
+}
+
+/* Quote button */
+#getQuoteButton {
+    padding: 10px 15px;
+    background-color: var(--background-dark);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+#getQuoteButton:hover {
+    background-color: var(--primary-purple);
+    transform: translateY(-2px);
+}
+
+#getQuoteButton:active {
+    transform: translateY(0);
+}
+
+/* Header */
+.header {
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--light-purple);
+    padding-bottom: 15px;
+}
+
+.greeting {
+    font-size: 2.5rem;
+    color: var(--primary-purple);
+    font-weight: 700;
+}
+
+.today-task-prompt {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-top: 5px;
+}
+
+/* General Input Section */
+.task-input-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+#newTaskInput {
+    flex-grow: 1;
+    padding: 12px;
+    border: 2px solid var(--light-purple);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    max-width: 400px;
+}
+
+#newTaskInput:focus {
+    outline: none;
+    border-color: var(--primary-purple);
+}
+
+#addTaskButton {
+    padding: 12px 20px;
+    background-color: var(--background-dark);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+#addTaskButton:hover {
+    background-color: var(--primary-purple);
+    transform: translateY(-2px);
+}
+
+#addTaskButton:active {
+    transform: scale(0.98);
+}
+
+/* Progress Section */
+.progress-section {
+    margin-bottom: 30px;
+}
+
+.progress-section h2 {
+    font-size: 1.2rem;
+    color: var(--primary-purple);
+    margin-bottom: 10px;
+}
+
+.progress-bar-container {
+    height: 10px;
+    background-color: var(--light-purple);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 0%; /* Initial width set by JS */
+    background-color: var(--background-dark);
+    transition: width 0.5s ease-in-out;
+    border-radius: 5px;
+}
+
+#progressText {
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+/* Task List */
+.task-list {
+    list-style: none;
+    padding: 0;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: var(--task-item-bg);
+    border-radius: 8px;
+    border-left: 5px solid var(--primary-purple);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out, background-color 0.2s, box-shadow 0.2s;
+}
+
+.task-item.fade-out {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.task-item:hover {
+    background: #e9e3ff;
+    box-shadow: 0 2px 10px rgba(106, 13, 173, 0.05);
+}
+
+.task-item.completed {
+    border-left-color: var(--completed-color);
+    background: #f7f9fb; /* Slightly different background for completed */
+    opacity: 0.7;
+}
+
+.task-content {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.task-content .task-text {
+    flex-grow: 1;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.task-item.completed .task-content .task-text {
+    text-decoration: line-through;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: var(--primary-purple);
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 10px;
+    opacity: 0.7;
+    transition: opacity 0.2s, color 0.2s, transform 0.1s;
+}
+
+.delete-btn:hover {
+    color: red;
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.task-checkbox {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--primary-purple);
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.task-checkbox:checked {
+    background-color: var(--primary-purple);
+    border-color: var(--primary-purple);
+}
+
+.task-checkbox:checked::after {
+    content: '✔';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 14px;
+}
+
+
+/* Modal (Pop-up) Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); /* Dark background with opacity */
+    padding-top: 50px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto; /* 15% from the top and centered */
+    padding: 30px;
+    border: 1px solid var(--light-purple);
+    border-radius: 10px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transform: scale(0.9);
+    transition: transform 0.3s ease-in-out;
+}
+
+.modal.is-visible {
+    opacity: 1;
+}
+
+.modal.is-visible .modal-content {
+    transform: scale(1);
+}
+
+/* Quote Modal Styles to match the image */
+#quoteModal .modal-content {
+    background-color: #fce4ec; /* Light pink from the image */
+    border-color: #f8bbd0; /* Darker pink border */
+    border-radius: 12px;
+    padding: 0;
+    overflow: hidden;
+    text-align: left;
+}
+
+#quoteModal .close-button {
+    color: #880e4f;
+}
+
+.quote-header {
+    background-color: #f8bbd0;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: #4a148c;
+    font-size: 1.2rem;
+}
+
+
+.quote-body {
+    padding: 20px;
+}
+
+#quoteText {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.quote-footer {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 10px;
+    border-top: 1px solid #f8bbd0;
+}
+
+.quote-footer button {
+    background-color: white;
+    border: 1px solid #f8bbd0;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.quote-footer button:hover {
+    background-color: #f8bbd0;
+}
+
+.close-button {
+    color: var(--text-color);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--primary-purple);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#modalTaskTitle {
+    color: var(--primary-purple);
+    margin-bottom: 10px;
+}
+
+#modalTaskStatus {
+    font-style: italic;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+#toggleTaskStatusButton {
+    padding: 10px 15px;
+    background-color: var(--background-dark);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#toggleTaskStatusButton:hover {
+    background-color: var(--primary-purple);
+}
+
+.loading-text {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-top: 10px;
+    display: none;
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kashish's Minimal To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="nav-container">
+            <div class="pomodoro-box">
+                <div class="timer-display" id="timerDisplay">25:00</div>
+                <div class="timer-controls">
+                    <button id="startButton">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                    </button>
+                    <button id="pauseButton">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                        </svg>
+                    </button>
+                    <button id="resetButton">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 5V2L8 6l4 4V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <button id="getQuoteButton">Quote</button>
+        </div>
+
+        <header class="header">
+            <h1 class="greeting">Hi, Kashish</h1>
+        </header>
+        
+        <h2 class="today-task-prompt">Today's Tasks</h2>
+
+        <div class="task-input-section">
+            <input type="text" id="newTaskInput" placeholder="Set a new task...">
+            <button id="addTaskButton">Add Task</button>
+        </div>
+        <div class="loading-text" id="loadingText" style="display: none;">Generating tasks...</div>
+
+        <div class="progress-section">
+            <h2>Progress</h2>
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progressBarFill"></div>
+            </div>
+            <p id="progressText">0/0 tasks completed</p>
+        </div>
+
+        <ul id="taskList" class="task-list">
+            </ul>
+        
+    </div>
+
+    <div id="taskDetailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modalTaskTitle">Task Details</h2>
+            <p id="modalTaskStatus"></p>
+            <button id="toggleTaskStatusButton">Mark as Complete</button>
+        </div>
+    </div>
+    
+    <div id="quoteModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="quote-header">Reminder</div>
+            <div class="quote-body">
+                <p id="quoteText"></p>
+                <div class="quote-footer">
+                    <button id="quoteCloseOkay">Okay</button>
+                    <button id="quoteCloseGreat">Great</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
